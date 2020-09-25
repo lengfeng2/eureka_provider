@@ -2,6 +2,9 @@ server:
   port: 80
 eureka:
   client:
+    # 配置真正的健康状态传播到eureka
+    healthcheck:
+      enabled: true
     #是否将自己注册到Eureka Server,默认为true，由于当前就是server，故而设置成false，表明该服务不会向eureka注册自己的信息
     register-with-eureka: true
     #是否从eureka server获取注册信息，由于单节点，不需要同步其他节点数据，用false
@@ -16,3 +19,13 @@ eureka:
 spring:
   application:
     name: provider
+#配置actuator所有端点
+#开启所有端点
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
